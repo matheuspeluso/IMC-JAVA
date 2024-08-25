@@ -1,6 +1,7 @@
 package controllers;
 
 import entities.Pessoa;
+import repositories.ImcRepository;
 import utils.CalculadoraIMC;
 
 import javax.swing.*;
@@ -19,8 +20,12 @@ public class PessoaController {
 
             var calculadoraIMC = new CalculadoraIMC();
             float imc = calculadoraIMC.calcularIMC(pessoa);
+            pessoa.setImc(imc);
 
             JOptionPane.showMessageDialog(null,"O imc de " + pessoa.getName() + "é de : "+imc);
+
+            var imcRepository = new ImcRepository();
+            imcRepository.exportarDados(pessoa);
         }
         catch (Exception e){
             System.out.println("Não foi possivel cadastrar pessoa :"+ e.getMessage());
